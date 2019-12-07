@@ -10,10 +10,6 @@ $.ajax({
     }
 })
 
-function formateDate(date) {
-    date = new Date(date);
-    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-}
 // 分页
 function changePage(page) {
     $.ajax({
@@ -62,13 +58,12 @@ $('#postsBox').on('click', '.delete', function () {
     if (confirm('你真的要进行删除吗?')) {
         var id = $(this).attr('data-id');
         $.ajax({
-            type:'delete',
-            url:'/posts/' + id,
-            success:function() {
+            type: 'delete',
+            url: '/posts/' + id,
+            success: function () {
                 location.reload();
             }
         })
-        
     }
-
 })
+
