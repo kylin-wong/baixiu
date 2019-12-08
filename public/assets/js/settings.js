@@ -10,7 +10,8 @@ $('#logo').on('change',function(e) {
         processData: false,
         success:function(response) {
             console.log(response)
-            $('#site_logo').val(response[0].images)
+            $('#hiddenLogo').val(response[0].images)
+            $("#preview").attr('src',response[0].images)
         }
     })
 })
@@ -32,7 +33,25 @@ $('#settingForm').on('submit',function(e) {
         data:obj,
         timeout:5000, // 请求的超时时间
         success:function(data) {
-            console.log(data);
+            location.reload();
         }
     })
+})
+
+// 网站设置数据
+$.ajax({
+    type:'get',
+    url:'/settings',
+    success:function(data) {
+        console.log(data);
+        if (data) {
+            $('#hiddenLogo').val(data.logo);
+            $("#preview").prop('src',data.logo);
+            $('input[name="title"]').val(data.title);
+            $('textarea[name="description"]').val(data.description);
+            $('input[name="keywords"]').val(data.keywords);
+            $('input[name="comment"]').prop('checked',data.comment);
+            $('input[name="review"]').prop('checked',data.review);
+        }
+    }
 })
