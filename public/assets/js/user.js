@@ -19,25 +19,24 @@ $("#userform").on('submit', function () {
 $('#modifyBox').on('change', '#avatar', function () {
   // 用户选择到的文件
   //   this.files[0]
-  var formData = new FormData();
-  formData.append('avatar', this.files[0]);
+	var formData = new FormData();
+	formData.append('avatar', this.files[0]);
 
-  $.ajax({
-    type: 'post',
-    url: '/upload',
-    data: formData,
-    processData: false,
-    // 告诉$.ajax方法不要解析请求参数 不要解析对应的值
-    processData: false,
-    // 告诉$.ajax方法不要设置请求参数的类型
-    contentType: false,
-    success: function (response) {
-      // console.log(response);
-      // 实现头像预览功能
-      $('preview').attr('src', response[0].avatar);
-      $('hiddenAvatar').val(response[0].avatar);
-    }
-  })
+	$.ajax({
+		type: 'POST',
+		url: '/upload',
+		data: formData,
+		// 告诉$.ajax方法不要解析请求参数
+		processData: false,
+		// 告诉$.ajax方法不要设置请求参数的类型
+		contentType: false,
+		success: function (response) {
+			console.log(response)
+			// 实现头像预览功能
+			$('#preview').attr('src', response[0].avatar);
+			$('#hiddenAvatar').val(response[0].avatar)
+		}
+	})
 })
 
 // 向服务器端发送请求 索要用户列表数据

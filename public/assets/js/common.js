@@ -19,3 +19,13 @@ function formateDate(date) {
     date = new Date(date);
     return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 }
+
+// 向服务器发送请求 索要登录详细信息
+$.ajax({
+  type:'get',
+  url:'/users/' + userId,
+  success:function(data) {
+    $('.avatar').attr('src',data.avatar);
+    $('.profile .name').html(data.nickName);
+  }
+})
