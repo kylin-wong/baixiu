@@ -36,7 +36,21 @@ $.ajax({
     success:function(response) {
         // console.log(response)
         var html = template('slidesTpl',{data:response})
-        console.log(html);
+        // console.log(html);
         $("#slidesBox").html(html)
+    }
+})
+
+$("#slidesBox").on('click','.delete',function() {
+    if(confirm('您真的要进行删除吗')) {
+        var id = $(this).attr('data-id');
+        
+        $.ajax({
+            type:'DELETE',
+            url:'/slides/' + id,
+            success:function() {
+                location.reload();
+            }
+        })
     }
 })
